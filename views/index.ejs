@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/style.css">
+	<title>Home</title>
+</head>
+    <style>
+        
+    </style>
+<body >
+	<div class="container">
+		<div class="title">
+			<h2><%= title %></h2>
+		</div>
+
+		<div class="inputContainer">
+		    <form action="/" method="post">
+		        <label for="tugas">Nama Tugas</label>
+		        <input type="text" class="input" id="tugas" name="tugas">
+		        
+		        <label for="dl">Deadline</label>
+		        <input type="date" class="input" id="dl" name="dl">
+
+		        <button type="button" class="btn-close">Batal</button>
+		        <input type="submit" class="btn" value="Tambah">
+		    </form>
+		</div>
+
+
+		<div class="task-wrapper">
+					<ul class="styled-list">
+						<% for (let datas of data) {%>
+					    <li>
+					    	<!-- <div class="wrap"> -->
+					    	 
+					    
+					    	<div class="card" onclick="toggleCheckbox(this)">
+						        <div class="left"><input type="checkbox" class="checkbox"></div>
+							        <div class="right">
+							            <div class="top"><%= datas.tugas %></div>
+							            <div class="bottom"><%= datas.dl %></div>
+							        </div>
+    						</div>
+    				
+    						<!-- </div> -->
+					    </li>
+					    
+					    <% } %>
+  					</ul>
+		</div>
+			
+
+		<div class="addtask">
+			<button class="add" id="toggle-modal" >Add</button>
+			<button class="add" >delete</button>
+		</div>
+
+	</div>
+<script src="app.js"></script>
+<script>
+	const btn = document.getElementById("toggle-modal");
+	const cancel = document.querySelector(".btn-close");
+	let modal = document.querySelector(".inputContainer");
+
+	btn.addEventListener("click", function() {
+		// e.preventDefault();
+		modal.style.display = "flex";
+		modal.style.animation = "fade-in 2s ease";
+
+	});
+
+	cancel.addEventListener("click", function() {
+
+		modal.style.display = "none";
+		modal.style.animation = "fade-out 3s ease";
+
+	})
+
+	function toggleCheckbox(card){
+		const checkbox = card.querySelector('.checkbox');
+
+		checkbox.checked = !checkbox.checked;
+	}
+
+
+
+	const dl = '2023-12-30';
+	const now = new Date();
+	const deadline = new Date(dl);
+	console.log(deadline);
+	console.log(now);
+	console.log(deadline - now);
+
+
+
+</script>
+</body>
+</html>
